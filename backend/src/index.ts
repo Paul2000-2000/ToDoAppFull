@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { MongoClient, Collection } from "mongodb";
 import cors from "cors";
+import { ObjectId } from 'mongodb';
 
 const app = express();
 app.use(cors());
@@ -78,8 +79,9 @@ app.get("/tasks", async (req: Request, res: Response): Promise<void> => {
 
   
     const categoriesArray = [
-      { category: "InProgress", tasks: categories.InProgress },
-      { category: "Completed", tasks: categories.Completed }
+      { id: new ObjectId(), category: "To Do", tasks: categories.ToDo },
+      { id: new ObjectId(), category: "In Progress", tasks: categories.InProgress },
+      { id: new ObjectId(), category: "Completed", tasks: categories.Completed }
     ];
 
     res.json(categoriesArray); 

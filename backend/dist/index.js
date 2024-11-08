@@ -1,6 +1,7 @@
 import express from "express";
 import { MongoClient } from "mongodb";
 import cors from "cors";
+import { ObjectId } from 'mongodb';
 const app = express();
 app.use(cors());
 app.use(express.json()); // Middleware for parsing JSON
@@ -53,8 +54,9 @@ app.get("/tasks", async (req, res) => {
             }
         });
         const categoriesArray = [
-            { category: "InProgress", tasks: categories.InProgress },
-            { category: "Completed", tasks: categories.Completed }
+            { id: new ObjectId(), category: "To Do", tasks: categories.ToDo },
+            { id: new ObjectId(), category: "In Progress", tasks: categories.InProgress },
+            { id: new ObjectId(), category: "Completed", tasks: categories.Completed }
         ];
         res.json(categoriesArray);
     }
