@@ -1,0 +1,15 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap:54px;
+  padding: 50px 21px 18px 21px;
+  background-color: #FFFFFF;
+}
