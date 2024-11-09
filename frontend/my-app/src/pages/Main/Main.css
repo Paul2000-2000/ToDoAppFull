@@ -1,5 +1,5 @@
 .maindivnow{
-    
+    width: 100%; /* Full width for grid */
     display: grid;
     gap: 54px;
     grid-template-columns: 1fr 4fr; /* First column takes 1 fraction, second takes 4 fractions */
@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%; /* Ensure full width */
 }
 
 .maindivnow-content-container{
@@ -217,3 +218,22 @@
   }
   
   
+
+  @media screen and (max-width: 1570px) {
+    
+    .maindivnow{
+        gap: 15px;
+    }
+  }
+
+  @media screen and (max-width: 1110px){
+    .maindivnow{
+        width: 100%;
+    }
+  }
+
+  @media  screen and (max-width:595px){
+    .maindivnow{
+        width: 100%;
+    }
+  }

@@ -2,7 +2,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
+
+
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
 }
 
 .App{
@@ -12,4 +18,6 @@
   gap:54px;
   padding: 50px 21px 18px 21px;
   background-color: #FFFFFF;
+  width: 100%; /* Ensure full width */
+  max-width: 100vw; /* Ensure no overflow */
 }
