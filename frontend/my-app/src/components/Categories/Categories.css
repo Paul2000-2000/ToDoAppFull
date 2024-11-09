@@ -2,11 +2,14 @@
     display: flex;
     gap: 54px;
     justify-content: space-evenly;
+    width: 100%; /* Ensure it takes the full width */
+    flex-wrap: wrap; /* Allow wrapping if items are too large */
 }
 
 .category {
     overflow-y: scroll;
     scrollbar-width: thin;
+    max-width: 100%; /* Ensure category doesn't overflow */
     width: 354px;
     height: 668px;
     display: flex;
@@ -74,7 +77,8 @@
 
 .task{
     padding:20px 15px;
-    width: 314px;
+    width: 100%; /* Use full width */
+    max-width: 314px; /* Maximum width */
     height: 169px;
     display: flex;
     flex-direction: column;
@@ -151,4 +155,72 @@
 .task-deadline-sp{
     font-weight: bold ;
     font-size: 12px;
+}
+
+
+@media screen  and (max-width:1570px){
+    
+    .categories{
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .category{
+        width: 255px;
+    }
+
+    .task{
+        width: 235px;
+    }
+
+}
+
+@media screen  and (max-width:1100px){
+    
+    .categories{
+        height: 100%;
+        min-width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .category{
+        overflow-y: hidden;
+        min-width: 100%;
+        height: 195px;
+        overflow-x: scroll;
+        
+        flex-direction: row;
+    }
+
+    .category::-webkit-scrollbar {
+        height: 5px; /* Adjust scrollbar height for horizontal scrolling */
+    }
+
+    .category-header{
+   
+        width: 100px;
+        min-width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding-bottom: 10px;
+        
+    }
+
+    .task{
+        min-width: 235px;
+    }
+
+
+}
+
+
+@media screen and (max-width:595px) {
+    .category-header{
+        width: 50px;
+        min-width: 50px;
+    }
 }

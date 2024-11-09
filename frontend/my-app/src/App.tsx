@@ -9,12 +9,16 @@ function App() {
 
 
   const [searchQuery, setSearchQuery] = useState(''); 
+
   
   return (
     <div className="App">
       
-      <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-      <Main searchQuery={searchQuery}/>
+      <Navbar searchQuery={searchQuery} 
+        setSearchQuery={setSearchQuery} 
+       />
+        
+      <Main searchQuery={searchQuery} />
     </div>
   );
 }

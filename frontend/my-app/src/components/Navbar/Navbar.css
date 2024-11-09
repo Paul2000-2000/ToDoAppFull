@@ -1,5 +1,5 @@
 nav{
-    
+    width: 100%; 
     background-color: #ECEDEE;
     height: 84px;
     display: flex;
@@ -10,6 +10,7 @@ nav{
 }
 
 .navbar-left{
+    
     width: 308px;
     height: 44px;
     border-radius: 22px;
@@ -49,3 +50,25 @@ nav{
     font-size: 16px;
 }
 
+.navbar-category-wrapper{
+    width: 80%;
+}
+
+
+@media screen and (max-width:595px) {
+
+        .navbar{
+            padding: none;
+        }
+        .navbar-left{
+            width: 145px;
+        }
+
+        .navbar-right{
+            width: 65px;
+        }
+
+        .navbar-left-inp{
+            width: 120px;
+        }
+}
