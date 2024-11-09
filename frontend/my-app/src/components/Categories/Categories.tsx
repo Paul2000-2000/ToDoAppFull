@@ -5,7 +5,7 @@ import { ICategories } from '../../interfaces/interfaces';
 import { IoMdClose } from "react-icons/io";
 import { HiDotsHorizontal } from "react-icons/hi";
 
-const Categories = () => {
+const Categories =({ searchQuery }: { searchQuery: string })=> {
   const [action, setAction] = useState(""); 
   const [errorMessage, setErrorMessage] = useState(''); 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +16,7 @@ const Categories = () => {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
   const [access, setAccess] = useState('');
+  
 
   // DELETE TASK: Uses number id
   const handleDelete = async (id: number) => {
@@ -126,10 +127,24 @@ const Categories = () => {
     fetchData();
   }, []);
 
+  const filteredCategories = categories.map(category => {
+    const filteredTasks = category.tasks.filter(task =>
+      task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      task.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    return {
+      ...category,
+      tasks: filteredTasks,
+    };
+  });
+
+    
+
   return (
     <div className='categories'>
       {
-        categories.map((category, index) => (
+        filteredCategories.map((category, index) => (
           <div key={index} className='category'>
             <div className='category-header'>
               {
