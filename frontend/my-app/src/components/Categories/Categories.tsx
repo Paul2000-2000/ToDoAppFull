@@ -25,7 +25,7 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       };
-      const response = await fetch(`http://localhost:5038/tasks/${id}`, requestOptions); 
+      const response = await fetch(`https://todoappbackend-1edac8e4706e.herokuapp.com/tasks/${id}`, requestOptions); 
       if (!response.ok) {  
         throw new Error(`Server error: ${response.statusText}`);
       }
@@ -89,7 +89,7 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
     };
 
     try {
-      const response = await fetch(`http://localhost:5038/tasks/${taskToEdit.id}`, {
+      const response = await fetch(`https://todoappbackend-1edac8e4706e.herokuapp.com/tasks/${taskToEdit.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const response = await fetch('http://localhost:5038/tasks');
+      const response = await fetch('https://todoappbackend-1edac8e4706e.herokuapp.com/tasks');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
