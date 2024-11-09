@@ -27,7 +27,7 @@ app.get("/tasks", async (req, res) => {
     }
     const tasksCollection = database.collection("tasks");
     try {
-        const result = await tasksCollection.find({}).limit(10).toArray();
+        const result = await tasksCollection.find({}).sort({ id: 1 }).limit(10).toArray(); // Sorting by numeric id
         if (!result || result.length === 0) {
             console.log("No tasks found in the database");
             res.status(404).send({ error: "No tasks found" });
@@ -68,10 +68,15 @@ app.get("/tasks", async (req, res) => {
 app.post("/tasks", async (req, res) => {
     if (!database) {
         res.status(500).send({ error: "Database not connected" });
+        return;
     }
     const tasksCollection = database.collection("tasks");
     try {
+        // Get the latest task id to increment (assuming you want auto-increment)
+        const latestTask = await tasksCollection.find().sort({ id: -1 }).limit(1).toArray();
+        const newId = latestTask.length > 0 ? latestTask[0].id + 1 : 1; // Start with 1 if no tasks exist
         const newTask = {
+            id: newId,
             category: req.body.category,
             access: req.body.access,
             deadline: req.body.deadline,
@@ -79,22 +84,53 @@ app.post("/tasks", async (req, res) => {
             title: req.body.title,
         };
         await tasksCollection.insertOne(newTask);
-        res.status(201).send({ message: "Task added successfully" });
+        res.status(201).send({ message: "Task added successfully", task: newTask });
     }
     catch (error) {
         console.error("Error adding task:", error);
         res.status(500).send({ error: "Error adding task" });
     }
 });
-app.delete("/tasks/:id", async (req, res) => {
+app.put("/tasks/:id", async (req, res) => {
     if (!database) {
         res.status(500).send({ error: "Database not connected" });
+        return;
     }
     const tasksCollection = database.collection("tasks");
     try {
-        const result = await tasksCollection.deleteOne({ id: req.query.id });
+        const taskId = parseInt(req.params.id); // Convert the id to a number
+        const updatedTask = {
+            category: req.body.category,
+            access: req.body.access,
+            deadline: req.body.deadline,
+            description: req.body.description,
+            title: req.body.title,
+        };
+        const result = await tasksCollection.updateOne({ id: taskId }, // Use the numeric id for the query
+        { $set: updatedTask });
+        if (result.modifiedCount === 0) {
+            res.status(404).send({ message: "Task not found" });
+            return;
+        }
+        res.status(200).send({ message: "Task updated successfully" });
+    }
+    catch (error) {
+        console.error("Error updating task:", error);
+        res.status(500).send({ error: "Error updating task" });
+    }
+});
+app.delete("/tasks/:id", async (req, res) => {
+    if (!database) {
+        res.status(500).send({ error: "Database not connected" });
+        return;
+    }
+    const tasksCollection = database.collection("tasks");
+    try {
+        const taskId = parseInt(req.params.id); // Convert the id to a number
+        const result = await tasksCollection.deleteOne({ id: taskId });
         if (result.deletedCount === 0) {
             res.status(404).send({ message: "Task not found" });
+            return;
         }
         res.status(200).send({ message: "Task deleted successfully" });
     }
