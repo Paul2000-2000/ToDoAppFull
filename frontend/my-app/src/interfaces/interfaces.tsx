@@ -1,5 +1,6 @@
 export interface ITask {
-    _id?: string;
+  
+    id : number;
     category: string;
     access: string;
     title:string;
