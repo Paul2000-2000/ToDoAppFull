@@ -18,7 +18,7 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
   const [access, setAccess] = useState('');
   
 
-  // DELETE TASK: Uses number id
+
   const handleDelete = async (id: number) => {
     try {
       const requestOptions = {
@@ -33,7 +33,7 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
       setCategories(prevCategories => {
         return prevCategories.map(category => ({
           ...category,
-          tasks: category.tasks.filter(task => task.id !== id),  // Using number `id`
+          tasks: category.tasks.filter(task => task.id !== id),  
         }));
       });
       
@@ -46,13 +46,13 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
     }
   };
 
-  // EDIT TASK: Uses number id
+ 
   const handleEdit = (id: number) => {
     setAction("");
     const category = categories.find((category) =>
-      category.tasks.some((task) => task.id === id)  // Using number `id`
+      category.tasks.some((task) => task.id === id)  
     );
-    const task = category?.tasks.find((task) => task.id === id);  // Using number `id`
+    const task = category?.tasks.find((task) => task.id === id);  
 
     if (task) {
       setTaskToEdit(task);
@@ -102,7 +102,7 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
       }
 
       setIsModalOpen(false);
-      fetchData();  // Refresh the task list after update
+      fetchData();  
     } catch (error) {
       setErrorMessage('Failed to update task');
       console.error(error);
@@ -168,9 +168,9 @@ const Categories =({ searchQuery }: { searchQuery: string })=> {
                   </div>
                   <select value={action} className="category-select" onChange={(e) => {
                     const action = e.target.value;
-                    if (action === "delete" && task.id) {  // Using number `id`
+                    if (action === "delete" && task.id) {  
                       handleDelete(task.id); 
-                    } else if (action === "edit" && task.id) {  // Using number `id`
+                    } else if (action === "edit" && task.id) { 
                       handleEdit(task.id); 
                     }
                   }}>

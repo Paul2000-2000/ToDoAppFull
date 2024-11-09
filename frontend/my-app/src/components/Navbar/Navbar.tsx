@@ -4,12 +4,12 @@ import { IoIosSearch } from "react-icons/io";
 import { LuFilter } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
 
-// Define the type of props (without using interfaces)
+
 const Navbar = ({ searchQuery, setSearchQuery }: { searchQuery: string, setSearchQuery: React.Dispatch<React.SetStateAction<string>> }) => {
 
-  // Handle input changes
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value); // Update state with input value
+    setSearchQuery(e.target.value); 
   };
 
   return (

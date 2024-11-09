@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb';
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // Middleware for parsing JSON
+app.use(express.json()); 
 
 const CONNECTION_STRING =
   "mongodb+srv://admin:damongo123D!@cluster0.utdyo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -47,7 +47,7 @@ app.get("/tasks", async (req: Request, res: Response): Promise<void> => {
   const tasksCollection: Collection<Task> = database.collection("tasks");
 
   try {
-    const result = await tasksCollection.find({}).sort({ id: 1 }).limit(10).toArray(); // Sorting by numeric id
+    const result = await tasksCollection.find({}).sort({ id: 1 }).limit(10).toArray(); 
 
     if (!result || result.length === 0) {
       console.log("No tasks found in the database");
@@ -101,9 +101,9 @@ app.post("/tasks", async (req: Request, res: Response): Promise<void> => {
   const tasksCollection = database.collection("tasks");
 
   try {
-    // Get the latest task id to increment (assuming you want auto-increment)
+  
     const latestTask = await tasksCollection.find().sort({ id: -1 }).limit(1).toArray();
-    const newId = latestTask.length > 0 ? latestTask[0].id + 1 : 1;  // Start with 1 if no tasks exist
+    const newId = latestTask.length > 0 ? latestTask[0].id + 1 : 1;  
 
     const newTask = {
       id: newId,
@@ -131,7 +131,7 @@ app.put("/tasks/:id", async (req: Request, res: Response): Promise<void> => {
   const tasksCollection: Collection<Task> = database.collection("tasks");
 
   try {
-    const taskId = parseInt(req.params.id);  // Convert the id to a number
+    const taskId = parseInt(req.params.id);  
 
     const updatedTask = {
       category: req.body.category,
@@ -142,7 +142,7 @@ app.put("/tasks/:id", async (req: Request, res: Response): Promise<void> => {
     };
 
     const result = await tasksCollection.updateOne(
-      { id: taskId },  // Use the numeric id for the query
+      { id: taskId },  
       { $set: updatedTask }
     );
 
@@ -167,7 +167,7 @@ app.delete("/tasks/:id", async (req: Request, res: Response): Promise<void> => {
   const tasksCollection: Collection<Task> = database.collection("tasks");
 
   try {
-    const taskId = parseInt(req.params.id);  // Convert the id to a number
+    const taskId = parseInt(req.params.id); 
 
     const result = await tasksCollection.deleteOne({ id: taskId });
 
@@ -183,7 +183,7 @@ app.delete("/tasks/:id", async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-// Start server
+
 const startServer = async () => {
   await connectToMongoDB();
   app.listen(5038, () => {

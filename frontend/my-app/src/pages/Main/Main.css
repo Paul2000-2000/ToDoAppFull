@@ -1,16 +1,16 @@
 .maindivnow{
-    width: 100%; /* Full width for grid */
+    width: 100%; 
     display: grid;
     gap: 54px;
-    grid-template-columns: 1fr 4fr; /* First column takes 1 fraction, second takes 4 fractions */
-    grid-template-rows: 1fr; /* Only one row, taking up equal height */
+    grid-template-columns: 1fr 4fr; 
+    grid-template-rows: 1fr; 
 }
 
 .maindivnow-content{
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 100%; /* Ensure full width */
+    width: 100%; 
 }
 
 .maindivnow-content-container{
@@ -213,8 +213,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dimmed background */
-    z-index: 999; /* Behind the modal */
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 999;
   }
   
   
