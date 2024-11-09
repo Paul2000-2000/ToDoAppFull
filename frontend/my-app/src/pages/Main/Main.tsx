@@ -9,7 +9,7 @@ import { FaRegClock } from "react-icons/fa";
 import { ITask } from '../../interfaces/interfaces';
 import { ICategories } from '../../interfaces/interfaces';
 
-const Main = () => {
+const Main = ({ searchQuery }: { searchQuery: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const today = new Date().toISOString().split('T')[0];
   const [errorMessage, setErrorMessage] = useState('');
@@ -180,7 +180,7 @@ const Main = () => {
         <button className='maindivnow-content-button' onClick={handleOpenModal}>+ Add Task</button>
 
       </div>
-      <Categories />
+      <Categories searchQuery={searchQuery}/>
 
       {/* Background overlay for dimming effect */}
       {isModalOpen && <div className="overlay"></div>}
