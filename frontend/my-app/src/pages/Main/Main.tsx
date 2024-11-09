@@ -21,12 +21,12 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
   const [date, setDate] = useState('');
   const [access, setAccess] = useState('');
 
-  // Function to open modal
+  
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
-  // Function to close modal
+  
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -38,7 +38,7 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data: ICategories[] = await response.json();
-      setCategories(data); // Set the state directly with the fetched categories
+      setCategories(data); 
       console.log(data);
 
       const totalTasksCount = data.reduce((total, category) => {
@@ -61,10 +61,10 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
     fetchData();
   }, []);
 
-  // Generate a new numeric task ID, could be based on the next available number in your database or a simple increment
+  
   const generateTaskId = (existingTasks: ITask[]): number => {
     const highestId = existingTasks.reduce((max, task) => (task.id > max ? task.id : max), 0);
-    return highestId + 1; // Simple increment
+    return highestId + 1; 
   };
 
   const addTask = async (task: ITask): Promise<void> => {
@@ -90,7 +90,7 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
       const data = await response.json();
       console.log('Task added successfully:', data);
 
-      // Update categories state
+    
       setCategories(prevCategories => {
         return prevCategories.map(category => {
           if (category.category === task.category) {
@@ -100,7 +100,7 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
         });
       });
 
-      // Update task counts
+    
       setTotalTasks(prevTotal => prevTotal + 1);
       if (task.category === 'Completed') {
         setCompletedTasks(prevCompleted => prevCompleted + 1);
@@ -115,11 +115,11 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
     }
   };
 
-  // Function to handle adding a new task
+ 
   const handleAddTask = () => {
-    setErrorMessage(''); // Clear previous error message
+    setErrorMessage('');
 
-    // Validate each field
+    
     if (!title) {
       setErrorMessage('Title is required');
     } else if (!description) {
@@ -131,11 +131,11 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
     } else if (!access) {
       setErrorMessage('Please assign a priority');
     } else {
-      // Generate a new task object with a numeric `id`
-      const taskId = generateTaskId(categories.flatMap(category => category.tasks)); // Generate the next available numeric ID
+      
+      const taskId = generateTaskId(categories.flatMap(category => category.tasks)); 
 
       const task = {
-        id: taskId,  // Use numeric ID here
+        id: taskId,  
         category: "To Do",
         access,
         title,
@@ -143,11 +143,11 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
         deadline: date,
       };
 
-      // Add the task by calling the addTask function
+      
       addTask(task);
 
       console.log('Form submitted successfully!');
-      setIsModalOpen(false); // Close the modal after submission
+      setIsModalOpen(false);
     }
   };
 
@@ -182,7 +182,7 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
       </div>
       <Categories searchQuery={searchQuery}/>
 
-      {/* Background overlay for dimming effect */}
+     
       {isModalOpen && <div className="overlay"></div>}
 
       {/* Modal */}
@@ -218,7 +218,7 @@ const Main = ({ searchQuery }: { searchQuery: string }) => {
               </select>
             </div>
 
-            {/* Error message */}
+            
             {errorMessage && <p style={{ color: 'red', textAlign: "center", margin: "5px" }}>{errorMessage}</p>}
             <button className="modal-container-close" onClick={handleAddTask} >Add</button>
           </div>

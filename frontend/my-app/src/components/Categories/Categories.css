@@ -2,14 +2,14 @@
     display: flex;
     gap: 54px;
     justify-content: space-evenly;
-    width: 100%; /* Ensure it takes the full width */
-    flex-wrap: wrap; /* Allow wrapping if items are too large */
+    width: 100%; 
+    flex-wrap: wrap; 
 }
 
 .category {
     overflow-y: scroll;
     scrollbar-width: thin;
-    max-width: 100%; /* Ensure category doesn't overflow */
+    max-width: 100%; 
     width: 354px;
     height: 668px;
     display: flex;
@@ -77,8 +77,8 @@
 
 .task{
     padding:20px 15px;
-    width: 100%; /* Use full width */
-    max-width: 314px; /* Maximum width */
+    width: 100%; 
+    max-width: 314px; 
     height: 169px;
     display: flex;
     flex-direction: column;
@@ -194,7 +194,7 @@
     }
 
     .category::-webkit-scrollbar {
-        height: 5px; /* Adjust scrollbar height for horizontal scrolling */
+        height: 5px; 
     }
 
     .category-header{
